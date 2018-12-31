@@ -1,22 +1,21 @@
-import { darkModeEnabled } from "../settings";
 const tintColor = '#d4c9ea';
 const darkerTintColor = '#8c6dc6';
 const twitchPurple = '#6441A5';
 const white = '#fff';
+const black = "#000";
 
 export default {
   twitchPurple,
   white,
   tintColor,
   textColor: {
-    primary: darkModeEnabled ? white : twitchPurple,
+    primary: black,
     secondary: tintColor
   },
-  background: darkModeEnabled ? twitchPurple : white,
-  tabIconDefault: darkModeEnabled ? darkerTintColor : tintColor,
-  tabIconSelected: darkModeEnabled ? tintColor : darkerTintColor,
-  tabBarText: darkModeEnabled ? tintColor : darkerTintColor,
-  tabBar: twitchPurple,
+  background: white,
+  tabIconDefault: tintColor,
+  tabIconSelected: darkerTintColor,
+  tabBarText: tintColor,
   errorBackground: 'red',
   errorText: '#fff',
   warningBackground: '#EAEB5E',

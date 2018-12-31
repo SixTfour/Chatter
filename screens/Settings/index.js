@@ -1,14 +1,47 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import { Switch, View, Text, ScrollView } from 'react-native';
+import colors from '../../constants/Colors';
+import styles from '../../styles';
+import { connect } from "react-redux";
+import { setDarkMode } from '../../store/actions/thunks';
 
-export default class Settings extends React.Component {
+function mapStateToProps(state) {
+  return {
+    darkModeEnabled: state.settings["Dark Mode"]
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return ({
+    setDarkMode: (value) => dispatch(setDarkMode(value))
+  })
+}
+
+export class Settings extends React.Component {
+  constructor() {
+    super();
+  }
+
   static navigationOptions = {
-    title: 'app.json',
+    title: 'Settings',
   };
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return (
+      <ScrollView style={ styles.container }>
+        <View>
+          <Text>Dark Mode</Text>
+          <Switch
+            trackColor = {{ true: colors.textColor.primary }}
+            thumbColor = { colors.textColor.primary }
+            onValueChange={ this.props.setDarkMode }
+            value={ this.props.darkModeEnabled }
+          />
+        </View>
+      </ScrollView>
+      
+    )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

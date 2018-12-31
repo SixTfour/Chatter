@@ -1,12 +1,22 @@
 import React from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { WebBrowser } from 'expo';
+import { Image, ScrollView, Text, View } from 'react-native';
 import styles from '../../styles/Home';
-import TopTabNavigator from '../../navigation/TopTabNavigator';
+import { getDarkMode } from '../../store/actions/thunks';
+import { connect } from "react-redux";
 
-export default class Home extends React.Component {
+function mapDispatchToProps(dispatch) {
+  return ({
+    getDarkMode: () => dispatch(getDarkMode())
+  })
+}
+
+export class Home extends React.Component {
   static navigationOptions = {
-    header: TopTabNavigator,
+    // header: TopTabNavigator,
+  };
+
+  componentDidMount() {
+    this.props.getDarkMode();
   };
 
   render() {
@@ -42,14 +52,7 @@ export default class Home extends React.Component {
       );
     }
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
+
+
+export default connect(null, mapDispatchToProps)(Home);
