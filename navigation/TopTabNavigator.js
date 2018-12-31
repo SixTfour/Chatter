@@ -50,7 +50,7 @@ SettingsStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator({ HomeStack, ChatStack, SettingsStack },
+export default createTabNavigator({ HomeStack, ChatStack, SettingsStack },
   {
     tabBarOptions: {
       style: styles.tabBar,
