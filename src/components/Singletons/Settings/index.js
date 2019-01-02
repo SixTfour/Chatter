@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, View, Text, ScrollView } from 'react-native';
-import colors from '../../constants/Colors';
-import styles from '../../styles';
+import colors from '../../../constants/Colors';
 import { connect } from "react-redux";
-import { setDarkMode } from '../../store/actions/thunks';
+import { setDarkMode } from '../../../store/actions/thunks';
+import { lightStyle, darkStyle } from "../../../styles/Home";
 
 function mapStateToProps(state) {
   return {
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setDarkMode: (value) => dispatch(setDarkMode(value))
+    toggleDarkMode: (value) => { dispatch(setDarkMode(value)) }
   })
 }
 
@@ -28,13 +28,13 @@ export class Settings extends React.Component {
 
   render() {
     return (
-      <ScrollView style={ styles.container }>
+      <ScrollView style={this.props.darkModeEnabled ? darkStyle.container : lightStyle.container}>
         <View>
           <Text>Dark Mode</Text>
           <Switch
-            trackColor = {{ true: colors.textColor.primary }}
-            thumbColor = { colors.textColor.primary }
-            onValueChange={ this.props.setDarkMode }
+            trackColor={{ true: colors.twitchPurple }}
+            thumbColor={ this.props.darkModeEnabled ? colors.white : colors.twitchPurple }
+            onValueChange={ this.props.toggleDarkMode }
             value={ this.props.darkModeEnabled }
           />
         </View>

@@ -2,12 +2,13 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+import Home from '../components/Singletons/Home';
+import Chat from '../components/Singletons/Chat';
+import Settings from '../components/Singletons/Settings';
 import TabBarIcon from '../components/TabBarIcon';
-import Home from '../screens/Home';
-import Chat from '../screens/Chat';
-import Settings from '../screens/Settings';
-import styles from '../styles/MainTabNavigator';
+import { lightStyle, darkStyle } from '../styles/MainTabNavigator';
 import colors from '../constants/Colors';
+import store from "../store";
 
 const HomeStack = createStackNavigator({ Home });
 
@@ -15,8 +16,7 @@ HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
-      focused={focused}
-      style={ styles.tabBarIcon }
+      focused={ focused }
       name={
         Platform.OS === 'ios'
           ? `ios-information-circle${focused ? '' : '-outline'}`
@@ -53,7 +53,6 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({ HomeStack, ChatStack, SettingsStack },
   {
     tabBarOptions: {
-      style: styles.tabBar,
       activeTintColor: colors.tabIconSelected,
       inactiveTintColor: colors.tabIconDefault
     }

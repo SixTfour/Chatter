@@ -1,17 +1,16 @@
 const tintColor = '#d4c9ea';
 const darkerTintColor = '#8c6dc6';
 const twitchPurple = '#6441A5';
+const darkTwitchPurple = '#19171c';
 const white = '#fff';
 const black = "#000";
 
 export default {
   twitchPurple,
+  darkTwitchPurple,
   white,
+  black,
   tintColor,
-  textColor: {
-    primary: black,
-    secondary: tintColor
-  },
   background: white,
   tabIconDefault: tintColor,
   tabIconSelected: darkerTintColor,

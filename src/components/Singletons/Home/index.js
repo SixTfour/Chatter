@@ -1,8 +1,14 @@
 import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
-import styles from '../../styles/Home';
-import { getDarkMode } from '../../store/actions/thunks';
+import { getDarkMode } from '../../../store/actions/thunks';
 import { connect } from "react-redux";
+import { lightStyle, darkStyle } from "../../../styles/Home";
+
+function mapStateToProps(state) {
+  return {
+    darkModeEnabled: state.settings["Dark Mode"]
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return ({
@@ -19,10 +25,11 @@ export class Home extends React.Component {
     this.props.getDarkMode();
   };
 
-  render() {
+  render() {    
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <View style={this.props.darkModeEnabled ? darkStyle.container : lightStyle.container}>
+        <ScrollView style={this.props.darkModeEnabled ? darkStyle.container : lightStyle.container}
+          contentContainerStyle={this.props.darkModeEnabled ? darkStyle.contentContainer : lightStyle.contentContainer}>
           <Text>Following</Text>
 
         </ScrollView>
@@ -39,14 +46,14 @@ export class Home extends React.Component {
       );
 
       return (
-        <Text style={styles.developmentModeText}>
+        <Text style={this.props.darkModeEnabled ? darkStyle.developmentModeText : lightStyle.developmentModeText}>
           Development mode is enabled, your app will be slower but you can use useful development
           tools. {learnMoreButton}
         </Text>
       );
     } else {
       return (
-        <Text style={styles.developmentModeText}>
+        <Text style={this.props.darkModeEnabled ? darkStyle.developmentModeText : lightStyle.developmentModeText}>
           You are not in development mode, your app will run at full speed.
         </Text>
       );
@@ -55,4 +62,4 @@ export class Home extends React.Component {
 }
 
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
